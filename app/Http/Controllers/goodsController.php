@@ -11,7 +11,7 @@ class goodsController extends Controller
      */
     public function index()
     {
-        //
+        return view('goods.index');
     }
 
     /**
@@ -19,7 +19,7 @@ class goodsController extends Controller
      */
     public function create()
     {
-        //
+        return view('goods.create');
     }
 
     /**
