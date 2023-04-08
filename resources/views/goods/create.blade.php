@@ -1,38 +1,39 @@
 @extends('layout.layout')
 
 @section('isi')
-    
+
 <!-- START FORM -->
-<form action='' method='post'>
+<form action='{{ url('goods') }}' method='post'>
+@csrf 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <div class="mb-3 row">
             <label for="kode_barang" class="col-sm-2 col-form-label">kode_barang</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='kode_barang' id="kode_barang">
+                <input type="text" class="form-control" name='kode_barang' value="{{ Session::get('kode_barang') }}" id="kode_barang">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="nama_barang" class="col-sm-2 col-form-label">nama_barang</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='nama_barang' id="nama_barang">
+                <input type="text" class="form-control" name='nama_barang' value="{{ Session::get('nama_barang') }}" id="nama_barang">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="kategori_barang" class="col-sm-2 col-form-label">kategori_barang</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name='kategori_barang' id="kategori_barang">
+                <input type="text" class="form-control" name='kategori_barang' value="{{ Session::get('kategori_barang') }}" id="kategori_barang">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="harga" class="col-sm-2 col-form-label">harga</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='harga' id="harga">
+                <input type="number" class="form-control" name='harga' value="{{ Session::get('harga') }}" id="harga">
             </div>
         </div>
         <div class="mb-3 row">
             <label for="qty" class="col-sm-2 col-form-label">qty</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" name='qty' id="qty">
+                <input type="number" class="form-control" name='qty' value="{{ Session::get('qty') }}" id="qty">
             </div>
         </div>
         <div class="mb-3 row">

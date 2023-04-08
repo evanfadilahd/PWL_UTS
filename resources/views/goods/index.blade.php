@@ -13,30 +13,37 @@
     
     <!-- TOMBOL TAMBAH DATA -->
     <div class="pb-3">
-        <a href='' class="btn btn-primary">+ Tambah Data</a>
+        <a href='{{ url('goods/create') }}' class="btn btn-primary">+ Tambah Data</a>
     </div>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="col-md-1">No</th>
-                <th class="col-md-3">NIM</th>
-                <th class="col-md-4">Nama</th>
-                <th class="col-md-2">Jurusan</th>
+                <th class="col-md-1">id_barang</th>
+                <th class="col-md-2">kode_barang</th>
+                <th class="col-md-3">nama_barang</th>
+                <th class="col-md-2">kategori_barang</th>
+                <th class="col-md-2">harga</th>
+                <th class="col-md-2">qty</th>
                 <th class="col-md-2">Aksi</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($data as $item)
             <tr>
-                <td>1</td>
-                <td>1001</td>
-                <td>Ani</td>
-                <td>Ilmu Komputer</td>
+                <td> {{ $item->id_barang }} </td>
+                <td> {{ $item->kode_barang }} </td>
+                <td> {{ $item->nama_barang }} </td>
+                <td> {{ $item->kategori_barang }} </td>
+                <td> {{ $item->harga }} </td>
+                <td> {{ $item->qty }} </td>
                 <td>
                     <a href='' class="btn btn-warning btn-sm">Edit</a>
                     <a href='' class="btn btn-danger btn-sm">Del</a>
                 </td>
             </tr>
+                
+            @endforeach
         </tbody>
     </table>
     
