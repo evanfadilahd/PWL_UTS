@@ -29,6 +29,7 @@
             </tr>
         </thead>
         <tbody>
+            {{-- Beda : <?php $i = $data->firstItem() ?> --}}
             @foreach ($data as $item)
             <tr>
                 <td> {{ $item->id_barang }} </td>
@@ -42,11 +43,11 @@
                     <a href='' class="btn btn-danger btn-sm">Del</a>
                 </td>
             </tr>
-                
+            {{-- Beda : <?php $i++ ?> --}}
             @endforeach
         </tbody>
     </table>
-    
+    {{ $data->links() }}
 </div>
 <!-- AKHIR DATA -->
 @endsection

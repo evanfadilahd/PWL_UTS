@@ -13,7 +13,7 @@ class goodsController extends Controller
      */
     public function index()
     {
-        $data = goods::orderBy('id_barang', 'desc')->get();
+        $data = goods::orderBy('id_barang', 'desc')->paginate(5);
         return view('goods.index')->with('data', $data);
     }
 
