@@ -11,9 +11,18 @@ class goodsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = goods::orderBy('id_barang', 'desc')->paginate(5);
+        $katakunci = $request -> katakunci;
+        $jumlahbaris = 4;
+        if(strlen($katakunci)){
+            $data = goods::where('kode_barang', 'like', "%$katakunci%")
+                ->orWhere('nama_barang', 'like', "%$katakunci%")
+                ->orWhere('kategori_barang', 'like', "%$katakunci%")
+                ->paginate($jumlahbaris);
+        } else {
+            $data = goods::orderBy('id_barang', 'desc')->paginate($jumlahbaris);
+        }
         return view('goods.index')->with('data', $data);
     }
 
@@ -73,9 +82,10 @@ class goodsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $data = goods::where('id_barang',$id)->first();
+        return view('goods.edit')->with('data', $data);
     }
 
     /**
@@ -83,7 +93,31 @@ class goodsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'kode_barang'=>'required',
+            'nama_barang'=>'required',
+            'kategori_barang'=>'required',
+            'harga'=>'required|numeric',
+            'qty'=>'required|numeric',
+        ],[
+            'kode_barang.required'=>'kode_barang wajib diisi',
+            'kode_barang.unique'=>'kode_barang wajib diisi',
+            'nama_barang.required'=>'nama_barang yang diisikan sudah ada dalam database',
+            'kategori_barang.required'=>'kategori_barang wajib diisi',
+            'harga.required'=>'harga wajib diisi',
+            'harga.numeric'=>'harga wajib dalam angka',
+            'qty.required'=>'qty wajib diisi',
+            'qty.numeric'=>'qty wajib dalam angka',
+        ]);
+        $data = [
+            'kode_barang'=>$request->kode_barang,
+            'nama_barang'=>$request->nama_barang,
+            'kategori_barang'=>$request->kategori_barang,
+            'harga'=>$request->harga,
+            'qty'=>$request->qty,
+        ];
+        goods::where('kode_barang', $id)->update($data);
+        return redirect()->to('goods')->with('success','Berhasil melakukan update data');
     }
 
     /**
@@ -91,6 +125,7 @@ class goodsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        goods::where('id_barang',$id)->delete();
+        return redirect()->to('goods')->with('success', 'Berhasil melakukan delete data');
     }
 }

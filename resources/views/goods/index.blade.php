@@ -5,8 +5,10 @@
 <div class="my-3 p-3 bg-body rounded shadow-sm">
     <!-- FORM PENCARIAN -->
     <div class="pb-3">
-        <form class="d-flex" action="" method="get">
-            <input class="form-control me-1" type="search" name="katakunci" value="{{ Request::get('katakunci') }}" placeholder="Masukkan kata kunci" aria-label="Search">
+        <form class="d-flex" action="{{ url('goods') }}" method="get">
+            <input class="form-control me-1" type="search" name="katakunci" value="{{ 
+                Request::get('katakunci') }}" placeholder="Masukkan kata kunci" 
+                aria-label="Search">
             <button class="btn btn-secondary" type="submit">Cari</button>
         </form>
     </div>
@@ -21,11 +23,11 @@
             <tr>
                 <th class="col-md-1">id_barang</th>
                 <th class="col-md-2">kode_barang</th>
-                <th class="col-md-3">nama_barang</th>
+                <th class="col-md-2">nama_barang</th>
                 <th class="col-md-2">kategori_barang</th>
                 <th class="col-md-2">harga</th>
-                <th class="col-md-2">qty</th>
-                <th class="col-md-2">Aksi</th>
+                <th class="col-md-1">qty</th>
+                <th class="col-md-3">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -39,15 +41,20 @@
                 <td> {{ $item->harga }} </td>
                 <td> {{ $item->qty }} </td>
                 <td>
-                    <a href='' class="btn btn-warning btn-sm">Edit</a>
-                    <a href='' class="btn btn-danger btn-sm">Del</a>
+                    <a href=' {{ url('goods/'.$item->id_barang.'/edit') }} ' class="btn btn-warning btn-sm">Edit</a>
+                    <form onsubmit="return confirm('Yakin akan menghapus data?')" class="d-inline" action=" {{ url('goods/'.$item->id_barang) }} "
+                        method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" name="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </td>
             </tr>
             {{-- Beda : <?php $i++ ?> --}}
             @endforeach
         </tbody>
     </table>
-    {{ $data->links() }}
+    {{ $data->withQueryString() -> links('pagination::bootstrap-5') }}
 </div>
 <!-- AKHIR DATA -->
 @endsection
