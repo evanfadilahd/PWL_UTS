@@ -14,7 +14,7 @@ class goodsController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request -> katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 5;
         if(strlen($katakunci)){
             $data = goods::where('kode_barang', 'like', "%$katakunci%")
                 ->orWhere('nama_barang', 'like', "%$katakunci%")

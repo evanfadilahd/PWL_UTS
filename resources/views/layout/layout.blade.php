@@ -7,6 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   </head>
   <body class="bg-light">
+  <div class="row">
+        <header class="p-3 text-white" style="background-color: #121e26;">
+            <label style="margin-left:12px;"> CRUD of Goods Data Manager </label>
+        </header>
+    </div>
+  </div>
     <main class="container">
       @include('component.message')
 
