@@ -2,6 +2,7 @@
 
 @section('isi')
 
+<br><br>
 <!-- START FORM -->
 <form action='{{ url('goods/'.$data->kode_barang) }}' method='post'>
 @csrf 

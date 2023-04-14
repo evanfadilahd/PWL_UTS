@@ -2,6 +2,7 @@
 
 @section('isi')
 
+<br><br>
 <!-- START FORM -->
 <form action='{{ url('goods') }}' method='post'>
 @csrf 
